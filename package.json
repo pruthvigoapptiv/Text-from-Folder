@@ -1,0 +1,15 @@
+{
+  "name": "textextract",
+  "version": "1.0.0",
+  "description": "nothing much",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pdf-parse": "^1.1.1",
+    "xlsx": "^0.18.5"
+  }
+}
