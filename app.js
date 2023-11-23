@@ -27,7 +27,7 @@ arr.push(["title","docNo","Dated","Remarks","GrandTotal"])
 
     for(let i=0;i<data.text.length-20;i++)
 {
-  // conditon for To:Title using the logic that is it followed by email and ends at char ']' 
+  // conditon for Remarks using the logic that is it followed by email and ends at char ']' 
   if(data.text.substr(i,7)=="Message")
   {
     i=i+9
@@ -63,6 +63,7 @@ arr.push(["title","docNo","Dated","Remarks","GrandTotal"])
     //For Dated just check whether the string Dated is present or not 
   if(data.text.substr(i,5)=="Dated")
   {
+    i=i+7;
     Dated = data.text.substr(i,18);
     // console.log(Dated);
   }
@@ -93,12 +94,12 @@ arr.push(["title","docNo","Dated","Remarks","GrandTotal"])
          temp+=data.text[i]
          i++;
        }
+       temp+=data.text[i+1]
+       temp+=data.text[i+2]
+       //store decimals
+
        GrandTotal=temp;
-      //   console.log(title);
-      //  console.log(docNo);
-      //  console.log(Remarks);
-      //  console.log(GrandTotal);
-      //  console.log(Dated);
+
     
    arr.push([title,docNo,Dated,Remarks,GrandTotal])
   //  console.log(arr);
