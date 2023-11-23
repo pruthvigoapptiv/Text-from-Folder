@@ -22,6 +22,7 @@ function jsonToExcel(jsonData, excelFileName) {
       
    var title,docNo,Dated,Remarks,GrandTotal;
 var arr=[]
+arr.push(["title","docNo","Dated","Remarks","GrandTotal"])
     // console.log(data.text);
 
     for(let i=0;i<data.text.length-20;i++)
@@ -39,7 +40,7 @@ var arr=[]
   var k =i;
    for( k=i;k>=10;k--)
    {
-    if(data.text[k]=='m')
+    if(data.text[k]=='m' || data.text[k]=='n')
     {
       break;
     }
