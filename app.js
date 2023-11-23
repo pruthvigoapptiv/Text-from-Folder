@@ -15,7 +15,7 @@ function jsonToExcel(jsonData, excelFileName,fileName) {
   // Write the workbook to an Excel file
   xlsx.writeFile(wb, excelFileName);
 
-  console.log(`Writing data for file ${fileName} in Excel: ${excelFileName}`);
+  console.log(`Writing data for file '${fileName}' in '${excelFileName}'`);
 }
 function extractTextFromPDF(pdfPath) {
   pdfparse(pdfPath).then(function (data) {
@@ -31,7 +31,7 @@ function extractTextFromPDF(pdfPath) {
     }
 
     var title, docNo, Dated, Remarks, GrandTotal;
-    arr.push([`The data for file:${temp12}`]);
+    arr.push([`The data for file : '${temp12}'`]);
     arr.push([`  `]);
     arr.push(["title", "docNo", "Dated", "Remarks", "GrandTotal","PageNo"]);
     // console.log(data.text);
