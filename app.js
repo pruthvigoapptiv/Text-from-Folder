@@ -100,17 +100,23 @@ var arr=[]
       //  console.log(Dated);
     
    arr.push([title,docNo,Dated,Remarks,GrandTotal])
-   console.log(arr);
+  //  console.log(arr);
  
      }
     }
-
-    var jsonData12 = {
-      data: arr
-  };
-   var jsonString = JSON.stringify(jsonData12, null, 2);
    str++;
-   const excelFileName = `output_excel${str}.xlsx`;
+   var len = pdfPath.length
+    var pdf=pdfPath;
+   var temp = ""
+   for(let j=9;j<len;j++)
+   {
+     if(pdf[j]=='.')
+     {
+       break;
+     }
+    temp+=pdf[j];
+   }
+   const excelFileName = `${temp}.xlsx`;
    jsonToExcel(arr, excelFileName)
 
 
