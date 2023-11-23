@@ -2,9 +2,9 @@ const fs = require("fs");
 const pdfparse = require("pdf-parse");
 const xlsx = require("xlsx");
 var arr = [];
-var pageNo=0;
+var pageNo = 0;
 // Function to extract text from a PDF file
-function jsonToExcel(jsonData, excelFileName,fileName) {
+function jsonToExcel(jsonData, excelFileName, fileName) {
   // Create a worksheet
   const ws = xlsx.utils.aoa_to_sheet(jsonData);
 
@@ -15,7 +15,7 @@ function jsonToExcel(jsonData, excelFileName,fileName) {
   // Write the workbook to an Excel file
   xlsx.writeFile(wb, excelFileName);
 
-  console.log(`Writing data for file '${fileName}' in '${excelFileName}'`);
+  console.log(`Writing data for file '${fileName}'`);
 }
 function extractTextFromPDF(pdfPath) {
   pdfparse(pdfPath).then(function (data) {
@@ -24,16 +24,16 @@ function extractTextFromPDF(pdfPath) {
     var pdf = pdfPath;
     var temp12 = "";
     for (let j = 9; j < len; j++) {
+      temp12 += pdf[j];
       if (pdf[j] == ".") {
         break;
       }
-      temp12 += pdf[j];
     }
+temp12+="pdf"
 
     var title, docNo, Dated, Remarks, GrandTotal;
-    arr.push([`The data for file : '${temp12}'`]);
     arr.push([`  `]);
-    arr.push(["title", "docNo", "Dated", "Remarks", "GrandTotal","PageNo"]);
+    arr.push(["FileName","title", "docNo", "Dated", "Remarks", "GrandTotal", "PageNo"]);
     // console.log(data.text);
 
     for (let i = 0; i < data.text.length - 20; i++) {
@@ -47,7 +47,8 @@ function extractTextFromPDF(pdfPath) {
       if (data.text[i] == "]") {
         var k = i;
         for (k = i; k >= 10; k--) {
-          if (data.text[k] == "m" || data.text[k] == "n") {
+          if((data.text[k]=='m' && data.text[k-3]=='.')|| (data.text[k]=='M' && data.text[k-3]=='.')|| (data.text[k]=='N' && data.text[k-2]=='.') || (data.text[k]=='n' && data.text[k-2]=='.'))
+           {
             break;
           }
         }
@@ -95,15 +96,15 @@ function extractTextFromPDF(pdfPath) {
 
         GrandTotal = temp;
         pageNo++;
-        arr.push([title, docNo, Dated, Remarks, GrandTotal,pageNo]);
+        arr.push([temp12,title, docNo, Dated, Remarks, GrandTotal, pageNo]);
         //  console.log(arr);
       }
     }
     arr.push([`  `]);
 
-    pageNo=0;
+    pageNo = 0;
     const excelFileName = `output.xlsx`;
-    jsonToExcel(arr, excelFileName,temp12);
+    jsonToExcel(arr, excelFileName, temp12);
   });
 }
 // Function to iterate over each PDF file in a folder
